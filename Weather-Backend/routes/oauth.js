@@ -7,7 +7,7 @@ router.get(
   "/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
-    prompt: "select_account", // Always show account selection
+    prompt: "select_account",
   })
 );
 
@@ -18,7 +18,7 @@ router.get(
     session: false,
   }),
   (req, res) => {
-    res.redirect("http://localhost:5173/home");
+    res.redirect("https://weather-app-hazel-nine-27.vercel.app/home");
   }
 );
 
