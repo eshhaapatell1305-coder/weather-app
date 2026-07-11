@@ -3,22 +3,22 @@ const passport = require("passport");
 
 const router = express.Router();
 
-// Google Login
 router.get(
   "/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
+    prompt: "select_account", // Always show account selection
   })
 );
 
-// Callback
 router.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/",
+    session: false,
   }),
   (req, res) => {
-    res.send("Google Login Successful!");
+    res.redirect("http://localhost:5173/home");
   }
 );
 

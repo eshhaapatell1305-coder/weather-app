@@ -1,31 +1,20 @@
 function SearchBar({ city, setCity, getWeather }) {
+  return (
+    <div className="search">
 
-    return (
+      <input
+        type="text"
+        placeholder="Enter City"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+      />
 
-        <div className="search">
+      <button onClick={getWeather}>
+        Search
+      </button>
 
-            <input
-
-                type="text"
-
-                placeholder="Enter City"
-
-                value={city}
-
-                onChange={(e) => setCity(e.target.value)}
-
-            />
-
-            <button onClick={getWeather}>
-
-                Search
-
-            </button>
-
-        </div>
-
-    );
-
+    </div>
+  );
 }
 
 export default SearchBar;

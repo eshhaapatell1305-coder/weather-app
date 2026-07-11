@@ -1,24 +1,21 @@
-import { Routes, Route } from "react-router-dom";
-
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-
+import Login from "./pages/Login";
 import Home from "./pages/Home";
 import About from "./pages/About";
 
-import "./App.css";
-
 function App() {
+  const location = useLocation();
+
   return (
     <>
-      <Navbar />
+      {location.pathname !== "/" && <Navbar />}
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
       </Routes>
-
-      <Footer />
     </>
   );
 }

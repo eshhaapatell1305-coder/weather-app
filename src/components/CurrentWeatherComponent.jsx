@@ -1,48 +1,43 @@
 function CurrentWeatherComponent({ weather }) {
-
-  if (!weather) return null;
-
   return (
-    <div className="weather-card">
+    <>
+      <h2 className="current-title">🌍 Current Weather</h2>
 
-      <img
-        className="weather-icon"
-        src={"https:" + weather.current.condition.icon}
-        alt={weather.current.condition.text}
-      />
+      <div className="current-card">
+        <img
+          src={weather.current.condition.icon}
+          alt="Weather Icon"
+        />
 
-      <h2>
-        {weather.location.name}, {weather.location.country}
-      </h2>
+        <h1>{weather.current.temp_c}°C</h1>
 
-      <h1 className="temperature">
-        {weather.current.temp_c}°C
-      </h1>
+        <h3>{weather.location.name}</h3>
 
-      <p className="condition">
-        {weather.current.condition.text}
-      </p>
+        <p>{weather.current.condition.text}</p>
 
-      <div className="weather-info">
+        <div className="weather-grid">
+          <div className="detail-card">
+            <h4>💧 Humidity</h4>
+            <p>{weather.current.humidity}%</p>
+          </div>
 
-        <div className="info-box">
-          <h4>💧 Humidity</h4>
-          <p>{weather.current.humidity}%</p>
+          <div className="detail-card">
+            <h4>💨 Wind</h4>
+            <p>{weather.current.wind_kph} km/h</p>
+          </div>
+
+          <div className="detail-card">
+            <h4>🌬 Pressure</h4>
+            <p>{weather.current.pressure_mb} mb</p>
+          </div>
+
+          <div className="detail-card">
+            <h4>👁 Visibility</h4>
+            <p>{weather.current.vis_km} km</p>
+          </div>
         </div>
-
-        <div className="info-box">
-          <h4>💨 Wind</h4>
-          <p>{weather.current.wind_kph} km/h</p>
-        </div>
-
-        <div className="info-box">
-          <h4>🌡 Pressure</h4>
-          <p>{weather.current.pressure_mb} hPa</p>
-        </div>
-
       </div>
-
-    </div>
+    </>
   );
 }
 

@@ -11,9 +11,7 @@ function Home() {
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // ===========================
   // WebSocket Connection
-  // ===========================
   useEffect(() => {
     socket.on("connect", () => {
       console.log("✅ Connected:", socket.id);
@@ -29,9 +27,7 @@ function Home() {
     };
   }, []);
 
-  // ===========================
   // Fetch Weather
-  // ===========================
   const getWeather = async () => {
     if (!city.trim()) {
       alert("Enter City");
@@ -42,8 +38,6 @@ function Home() {
 
     try {
       const response = await API.get(`/weather?city=${city}`);
-
-      console.log(response.data);
 
       setWeather(response.data);
 
@@ -58,12 +52,10 @@ function Home() {
     setLoading(false);
   };
 
-  // ===========================
-  // UI
-  // ===========================
   return (
     <div className="container">
       <div className="glass-card">
+
         <h1 className="title">🌤 Weather Forecast</h1>
 
         <SearchBar
@@ -80,6 +72,7 @@ function Home() {
             <Forecast forecast={forecast} />
           </>
         )}
+
       </div>
     </div>
   );

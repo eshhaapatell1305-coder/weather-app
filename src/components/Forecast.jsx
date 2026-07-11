@@ -1,39 +1,36 @@
-import ForecastCard from "./ForecastCard";
-
 function Forecast({ forecast }) {
+  return (
+    <>
+      <h2 className="forecast-title">
+        📅 5-Day Forecast
+      </h2>
 
-    if (!forecast) return null;
+      <div className="forecast-container">
+        {forecast.map((day, index) => (
+          <div className="forecast-card" key={index}>
+            <h3>{day.date}</h3>
 
-    return (
+            <img
+              src={day.day.condition.icon}
+              alt=""
+            />
 
-        <div className="forecast">
+            <h2>{day.day.avgtemp_c}°C</h2>
 
-            <h2>
+            <p>{day.day.condition.text}</p>
 
-                5-Day Forecast
+            <hr />
 
-            </h2>
+            <p>⬆ {day.day.maxtemp_c}°C</p>
 
-            <div className="forecast-container">
+            <p>⬇ {day.day.mintemp_c}°C</p>
 
-                {forecast.map((day) => (
-
-                    <ForecastCard
-
-                        key={day.date}
-
-                        day={day}
-
-                    />
-
-                ))}
-
-            </div>
-
-        </div>
-
-    );
-
+            <p>💧 {day.day.avghumidity}%</p>
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }
 
 export default Forecast;

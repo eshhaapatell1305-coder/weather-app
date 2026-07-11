@@ -4,6 +4,9 @@ const http = require("http");
 const { Server } = require("socket.io");
 require("dotenv").config();
 
+const passport = require("passport");
+require("./config/passport"); // IMPORTANT
+
 const logger = require("./middleware/logger");
 const weatherRoutes = require("./routes/weather");
 const userRoutes = require("./routes/users");
@@ -12,7 +15,11 @@ const oauthRoutes = require("./routes/oauth");
 const app = express();
 
 app.use(cors());
+
 app.use(express.json());
+
+// Initialize Passport
+app.use(passport.initialize());
 
 // Logger
 app.use(logger);
@@ -22,14 +29,14 @@ app.use("/api", weatherRoutes);
 app.use("/api/users", userRoutes);
 app.use("/auth", oauthRoutes);
 
-// Home
+// Home Route
 app.get("/", (req, res) => {
   res.json({
     message: "Weather Forecast Backend Running 🚀",
   });
 });
 
-// Create HTTP Server
+// HTTP Server
 const server = http.createServer(app);
 
 // Socket.IO
@@ -39,8 +46,9 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
+
 app.set("io", io);
-// Socket Connection
+
 io.on("connection", (socket) => {
   console.log("✅ User Connected:", socket.id);
 
