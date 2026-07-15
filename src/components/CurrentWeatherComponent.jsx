@@ -1,4 +1,8 @@
 function CurrentWeatherComponent({ weather }) {
+  if (!weather || !weather.current || !weather.location) {
+    return null;
+  }
+
   return (
     <>
       <h2 className="current-title">🌍 Current Weather</h2>

@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import CurrentWeatherComponent from "../components/CurrentWeatherComponent";
 import Forecast from "../components/Forecast";
 import API from "../api/weatherApi";
-import socket from "../socket";
 
 function Home() {
   const [city, setCity] = useState("");
@@ -11,23 +10,6 @@ function Home() {
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // WebSocket Connection
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("✅ Connected:", socket.id);
-    });
-
-    socket.on("message", (msg) => {
-      console.log("📩 Server:", msg);
-    });
-
-    return () => {
-      socket.off("connect");
-      socket.off("message");
-    };
-  }, []);
-
-  // Fetch Weather
   const getWeather = async () => {
     if (!city.trim()) {
       alert("Enter City");
@@ -39,10 +21,21 @@ function Home() {
     try {
       const response = await API.get(`/weather?city=${city}`);
 
+console.log("Weather API Response:", response.data);
+
+setWeather(response.data);
+
+if (response.data.forecast) {
+  setForecast(response.data.forecast.forecastday);
+}
+      console.log(response.data);
+
       setWeather(response.data);
 
       if (response.data.forecast) {
         setForecast(response.data.forecast.forecastday);
+      } else {
+        setForecast([]);
       }
     } catch (error) {
       console.error(error);
@@ -55,7 +48,6 @@ function Home() {
   return (
     <div className="container">
       <div className="glass-card">
-
         <h1 className="title">🌤 Weather Forecast</h1>
 
         <SearchBar
@@ -66,13 +58,40 @@ function Home() {
 
         {loading && <h2 className="loading">Loading...</h2>}
 
-        {weather && (
-          <>
-            <CurrentWeatherComponent weather={weather} />
-            <Forecast forecast={forecast} />
-          </>
-        )}
+{/* Welcome Section */}
+{!weather && !loading && (
+  <div className="welcome-card">
+    <h1>☀️ Welcome to Weather Forecast</h1>
 
+    <p>
+      Search any city around the world and get
+      real-time weather updates, humidity, wind speed,
+      pressure, visibility, and a 5-day forecast.
+    </p>
+
+    <div className="weather-icons">
+      <span>☀️</span>
+      <span>🌤️</span>
+      <span>⛅</span>
+      <span>🌦️</span>
+      <span>🌧️</span>
+      <span>⛈️</span>
+      <span>❄️</span>
+    </div>
+
+    <h3>🔍 Start by entering a city above.</h3>
+  </div>
+)}
+
+{weather && (
+  <>
+    <CurrentWeatherComponent weather={weather} />
+
+    {forecast.length > 0 && (
+      <Forecast forecast={forecast} />
+    )}
+  </>
+)}
       </div>
     </div>
   );
