@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://weather-app-l4u6.onrender.com/api",
+  baseURL: "https://weather-app-hazel-nine-27.vercel.app",
 });
 
 export default API;

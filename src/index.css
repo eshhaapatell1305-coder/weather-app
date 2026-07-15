@@ -200,3 +200,28 @@ body{
 .loading{
     color:white;
 }
+
+/* ================= Technologies Used ================= */
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.tech-card {
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 18px;
+    color: white;
+    font-size: 17px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+    transition: .3s;
+}
+
+.tech-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,.28);
+}

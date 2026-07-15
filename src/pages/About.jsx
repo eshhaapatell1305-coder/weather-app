@@ -30,14 +30,28 @@ function About() {
 
         <h2>🛠 Technologies Used</h2>
 
-        <ul className="feature-list">
-          <li>React.js</li>
-          <li>React Router</li>
-          <li>React Hooks (useState)</li>
-          <li>WeatherAPI</li>
-          <li>CSS3</li>
-        </ul>
+        <div className="tech-grid">
 
+          <div className="tech-card">⚛ React.js</div>
+          <div className="tech-card">⚡ Vite</div>
+          <div className="tech-card">🎨 CSS3</div>
+          <div className="tech-card">🧭 React Router</div>
+          <div className="tech-card">📡 Axios</div>
+          <div className="tech-card">🟢 Node.js</div>
+          <div className="tech-card">🚀 Express.js</div>
+          <div className="tech-card">🍃 MongoDB</div>
+          <div className="tech-card">🟥 Redis Cloud</div>
+          <div className="tech-card">📬 Bull Queue</div>
+          <div className="tech-card">🔌 Socket.IO</div>
+          <div className="tech-card">🔐 Passport.js</div>
+          <div className="tech-card">🔑 JWT Authentication</div>
+          <div className="tech-card">🌐 Google OAuth 2.0</div>
+          <div className="tech-card">☁ WeatherAPI</div>
+          <div className="tech-card">🔗 REST APIs</div>
+          <div className="tech-card">▲ Vercel</div>
+          <div className="tech-card">🚂 Render</div>
+
+        </div>
       </div>
     </div>
   );
