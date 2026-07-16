@@ -19,6 +19,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5000",
   "https://weather-app-hazel-nine-27.vercel.app",
+  "https://weather-app-nu-flame-87.vercel.app",
 ];
 
 app.use(
