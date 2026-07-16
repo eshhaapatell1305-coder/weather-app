@@ -11,9 +11,10 @@ function Forecast({ forecast }) {
             <h3>{day.date}</h3>
 
             <img
-              src={day.day.condition.icon}
-              alt=""
-            />
+  src={day.day.condition.icon}
+  alt={day.day.condition.text}
+  loading="lazy"
+/>
 
             <h2>{day.day.avgtemp_c}°C</h2>
 

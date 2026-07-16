@@ -9,9 +9,10 @@ function CurrentWeatherComponent({ weather }) {
 
       <div className="current-card">
         <img
-          src={weather.current.condition.icon}
-          alt="Weather Icon"
-        />
+  src={weather.current.condition.icon}
+  alt={weather.current.condition.text}
+  loading="lazy"
+/>
 
         <h1>{weather.current.temp_c}°C</h1>
 
