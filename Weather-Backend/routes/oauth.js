@@ -18,7 +18,7 @@ router.get(
     session: false,
   }),
   (req, res) => {
-    res.redirect("https://weather-app-hazel-nine-27.vercel.app/home");
+   res.redirect("https://weather-app-nu-flame-87.vercel.app/home");
   }
 );
 
