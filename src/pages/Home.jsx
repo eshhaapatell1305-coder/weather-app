@@ -11,39 +11,43 @@ function Home() {
   const [loading, setLoading] = useState(false);
 
   const getWeather = async () => {
-    if (!city.trim()) {
-      alert("Enter City");
-      return;
+  if (!city.trim()) {
+    alert("Enter City");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const response = await API.get(`/weather?city=${city}`);
+
+    console.log("Weather API Response:", response.data);
+
+    setWeather(response.data);
+
+    if (response.data.forecast) {
+      setForecast(response.data.forecast.forecastday);
+    } else {
+      setForecast([]);
     }
 
-    setLoading(true);
+  } catch (error) {
+    console.error(error);
 
-    try {
-      const response = await API.get(`/weather?city=${city}`);
+    // Clear previous weather
+    setWeather(null);
+    setForecast([]);
 
-console.log("Weather API Response:", response.data);
-
-setWeather(response.data);
-
-if (response.data.forecast) {
-  setForecast(response.data.forecast.forecastday);
-}
-      console.log(response.data);
-
-      setWeather(response.data);
-
-      if (response.data.forecast) {
-        setForecast(response.data.forecast.forecastday);
-      } else {
-        setForecast([]);
-      }
-    } catch (error) {
-      console.error(error);
+    if (error.response) {
+      alert(error.response.data.message || "City not found!");
+    } else {
       alert("Backend Connection Failed");
     }
 
+  } finally {
     setLoading(false);
-  };
+  }
+};
 
   return (
     <div className="container">
